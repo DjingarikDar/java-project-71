@@ -13,10 +13,7 @@ jobs:
         with:
           distribution: 'oracle'
           java-version: '17'
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v2
+     
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
+        run: ./gradlew build
     
