@@ -1,0 +1,8 @@
+{
+  "boo": "far",
+  "timeout": 20,
+  "verbose": true,
+  "host": "hexlet.io",
+  "b-key": "b-value",
+  "Double": 34.1
+}

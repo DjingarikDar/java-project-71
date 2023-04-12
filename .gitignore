@@ -1,32 +1,14 @@
-##############################
-## Java
-##############################
-.mtj.tmp/
-*.class
-*.jar
-*.war
-*.ear
-*.nar
-hs_err_pid*
-replay_pid*
+# Ignore Gradle project-specific cache directory
+.gradle
 
-##############################
-## Gradle
-##############################
-#bin/
-#build/
-#.gradle
-#.gradletasknamecache
-#gradle-app.setting
-#!gradle-wrapper.jar
+# Ignore Gradle build output directory
+build
 
-##############################
-## IntelliJ
-##############################
-out/
+**/logs/
+
+.settings
+bin
+.project*
+.classpath
 .idea/
-.idea_modules/
-*.iml
-*.ipr
-*.iws
 
