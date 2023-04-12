@@ -1,5 +1,5 @@
 name: build-test-lint
-run-name: ${{.github_actor}} builds & check project
+run-name: ${{github.actor}} builds & check project
 on: 
   push:
   workflow_dispatch:
