@@ -27,7 +27,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 8.1
         arguments: build
@@ -37,9 +37,9 @@ jobs:
       env:
       # Set CC_TEST_REPORTER_ID as secret of your repo
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-        JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
+        JACOCO_SOURCE_PATH: app/src/main/java"
       with:
       # The report file must be there, otherwise Code Climate won't find it
         coverageCommand: gradle jacocoTestReport
-        coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+        coverageLocations: app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
     
