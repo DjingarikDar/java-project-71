@@ -46,8 +46,13 @@ checkstyleTest {
 }
 jacoco {
     toolVersion = "0.8.9"
-    reportsDirectory = layout.buildDirectory.dir('JacocoReport')
 }
+
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
 }
