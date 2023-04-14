@@ -8,7 +8,7 @@
 name: Gradle-build
 
 on:
-  push:
+#  push:
   workflow_dispatch: 
 
 permissions:
@@ -37,9 +37,8 @@ jobs:
       env:
       # Set CC_TEST_REPORTER_ID as secret of your repo
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-  #   JACOCO_SOURCE_PATH: app/src/main/java"
-   #   with:
+        JACOCO_SOURCE_PATH: "${{github.workspace}}app/src/main/java"
+      with:
       # The report file must be there, otherwise Code Climate won't find it
-    #    coverageCommand: gradle jacocoTestReport
-     #   coverageLocations: app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-    
+        coverageCommand: make -C app report
+        coverageLocations: ${{github.workspace}}app/build/reports/jacoco/test/jacocoTestReports:jacoco
