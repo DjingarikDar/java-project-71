@@ -26,12 +26,6 @@ public class Differ {
 
     private static String strResultOfComparingMaps(String key, Map<String, Object> map1, Map<String, Object> map2) {
         StringBuilder resultStr = new StringBuilder();
-        if (map1.containsKey(key) && !map2.containsKey(key)) {
-            resultStr.append("  - ").append(key).append(": ").append(map1.get(key));
-        }
-        if (map2.containsKey(key) && !map1.containsKey(key)) {
-            resultStr.append("  + ").append(key).append(": ").append(map2.get(key));
-        }
         if (map1.containsKey(key) && map2.containsKey(key)) {
             if (map1.get(key).equals(map2.get(key))) {
                 resultStr.append("    ").append(key).append(": ").append(map1.get(key));
@@ -40,6 +34,10 @@ public class Differ {
                         .append(": ").append(map1.get(key)).append("\n")
                         .append("  + ").append(key).append(": ").append(map2.get(key));
             }
+        } else if (map1.containsKey(key)) {
+            resultStr.append("  - ").append(key).append(": ").append(map1.get(key));
+        } else {
+            resultStr.append("  + ").append(key).append(": ").append(map2.get(key));
         }
         return resultStr.toString();
     }
