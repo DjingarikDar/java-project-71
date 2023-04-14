@@ -1,0 +1,19 @@
+name: Test-coverage
+on: workflows_dispatch
+jobs:
+  coverage:
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v3.2.0
+        env:
+      # Set CC_TEST_REPORTER_ID as secret of your repo
+         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+         JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
+        with:
+      # The report file must be there, otherwise Code Climate won't find it
+          workingDirectory: app
+          coverageCommand: make report
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReports:jacoco
