@@ -1,5 +1,6 @@
 name: Test-coverage
-on: workflows_dispatch
+on: 
+  workflow_dispatch:
 jobs:
   coverage:
     name: coverage
