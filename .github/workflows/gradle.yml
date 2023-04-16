@@ -8,17 +8,16 @@
 name: Gradle-build
 
 on:
-#  push:
+  push:
   workflow_dispatch: 
 
 permissions:
   contents: read
 
 jobs:
+  
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -27,9 +26,27 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2
+      run: make -C app build
+  
+  check_coverage:
+    needs: build
+    runs-on: ubuntu_latest
+    steps:
+    - uses: action/checjout@v3
+    - name: Setup JDK
+      uses: actions/setup-java@v3
       with:
-        gradle-version: 8.1
-        arguments: build
-        build-root-directory: app
+        java-version: '17'
+        distribution: 'oracle'
+    - name: Test & Publish code coverage
+      uses: paambaati/codeclimate-action@v3.2.0
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
+      with:
+      # The report file must be there, otherwise Code Climate won't find it
+          workingDirectory: app
+          coverageCommand: make -C app report
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          debug: false
     
