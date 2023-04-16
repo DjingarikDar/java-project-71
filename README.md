@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/DjingarikDar/java-project-71/workflows/hexlet-check/badge.svg)](https://github.com/DjingarikDar/java-project-71/actions)
 
 ### Gradle build and Test Coverage
-[![Actions Status](https://github.com/DjingarikDar/java-project-71/workflows/Gradle-build/badge.svg)](https://github.com/DjingarikDar/java-project-71/actions/workflows/gradle.yml)
+[![Actions Status](https://github.com/DjingarikDar/java-project-71/workflows/Gradle-build-and-Test/badge.svg)](https://github.com/DjingarikDar/java-project-71/actions/workflows/gradle.yml)
 
 ### Codeclimate
 [![Maintainability](https://api.codeclimate.com/v1/badges/eaba1f37acbec138a8f8/maintainability)](https://codeclimate.com/github/DjingarikDar/java-project-71/maintainability)
