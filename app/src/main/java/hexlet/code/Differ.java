@@ -11,8 +11,8 @@ public class Differ {
     public static String generator(String filepath1, String filepath2) throws Exception {
         Path pathToFile1 = Paths.get(filepath1).toAbsolutePath().normalize();
         Path pathToFile2 = Paths.get(filepath2).toAbsolutePath().normalize();
-        Map<String, Object> mapJsonFile1 = Parser.toMap(pathToFile1);
-        Map<String, Object> mapJsonFile2 = Parser.toMap(pathToFile2);
+        Map<String, Object> mapJsonFile1 = Parser.jsonToMap(pathToFile1);
+        Map<String, Object> mapJsonFile2 = Parser.jsonToMap(pathToFile2);
         if (mapJsonFile1.isEmpty() && mapJsonFile2.isEmpty()) {
             return "{}";
         }
