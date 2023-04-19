@@ -1,0 +1,8 @@
+# File1 for Test
+host: hexlet.io
+timeout: 50
+proxy: 123.234.53.22
+follow: False
+a-key: a-value
+Double: 41.2
+boo: far

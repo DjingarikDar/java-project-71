@@ -1,0 +1,7 @@
+#File2 for Test
+boo: far
+timeout: 20
+verbose: True
+host: hexlet.io
+b-key: b-value
+Double: 34.1

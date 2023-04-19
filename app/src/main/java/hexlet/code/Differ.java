@@ -11,16 +11,27 @@ public class Differ {
     public static String generator(String filepath1, String filepath2) throws Exception {
         Path pathToFile1 = Paths.get(filepath1).toAbsolutePath().normalize();
         Path pathToFile2 = Paths.get(filepath2).toAbsolutePath().normalize();
-        Map<String, Object> mapJsonFile1 = Parser.jsonToMap(pathToFile1);
-        Map<String, Object> mapJsonFile2 = Parser.jsonToMap(pathToFile2);
-        if (mapJsonFile1.isEmpty() && mapJsonFile2.isEmpty()) {
+        Parser parser;
+        if (filepath1.endsWith("json") && filepath2.endsWith("json")) {
+            parser = FactoryParser.createParser(ParserType.JSON);
+        } else if (filepath1.endsWith("yml") && filepath2.endsWith("yml")) {
+            parser = FactoryParser.createParser(ParserType.YAML);
+        } else {
+            throw new Exception("files have different types \n"
+                    + pathToFile1
+                    + "\n"
+                    + pathToFile2);
+        }
+        Map<String, Object> file1ToMap = parser.toMap(pathToFile1);
+        Map<String, Object> file2ToMap = parser.toMap(pathToFile2);
+        if (file1ToMap.isEmpty() && file2ToMap.isEmpty()) {
             return "{}";
         }
-        Stream<String> streamKey = Stream.concat(mapJsonFile1.keySet().stream(), mapJsonFile2.keySet().stream());
+        Stream<String> streamKey = Stream.concat(file1ToMap.keySet().stream(), file2ToMap.keySet().stream());
         var keys = streamKey.collect(Collectors.toSet());
         return keys.stream()
                 .sorted(String::compareTo)
-                .map(key -> strResultOfComparingMaps(key, mapJsonFile1, mapJsonFile2))
+                .map(key -> strResultOfComparingMaps(key, file1ToMap, file2ToMap))
                 .collect(Collectors.joining("\n", "{\n", "\n}"));
     }
 
