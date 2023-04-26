@@ -1,17 +1,28 @@
 package hexlet.code;
 
+import hexlet.code.parser.FactoryParser;
+import hexlet.code.parser.JSONParser;
+import hexlet.code.parser.Parser;
+import hexlet.code.parser.YAMLParser;
 import org.junit.jupiter.api.Test;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class FactoryParserTest {
 
     @Test
-    void createParser() {
+    void createParser() throws Exception {
+        Path filepath;
+        filepath = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
+
         Parser actual;
-        actual = FactoryParser.createParser(ParserType.JSON);
+        actual = FactoryParser.getParser(filepath, filepath);
         assertInstanceOf(JSONParser.class, actual);
-        actual = FactoryParser.createParser(ParserType.YAML);
+        filepath = Paths.get("src/test/resources/file1.yml").toAbsolutePath().normalize();
+        actual = FactoryParser.getParser(filepath, filepath);
         assertInstanceOf(YAMLParser.class, actual);
     }
 }
