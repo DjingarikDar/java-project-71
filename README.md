@@ -13,3 +13,6 @@
 
 ### Differ Step7
 [![asciicast](https://asciinema.org/a/578672.svg)](https://asciinema.org/a/578672)
+
+### Differ Step8
+[![asciicast](https://asciinema.org/a/582253.svg)](https://asciinema.org/a/582253)
