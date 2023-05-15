@@ -14,7 +14,7 @@ class JsonFormatterTest {
     Path pathToFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
     Path pathToFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
 
-  
+
 
     @Test
     void generateString() throws Exception {
