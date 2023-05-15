@@ -5,6 +5,8 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
 
@@ -13,16 +15,16 @@ import java.util.concurrent.Callable;
 public class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, defaultValue = "stylish", description = "output format [default: stylish]")
     private String format;
-    @Parameters(index = "0", description = "path to first file", defaultValue = "file1.json")
+    @Parameters(index = "0", description = "path to first file")
     private String strFilePath1;
-    @Parameters(index = "1", description = "path to second file", defaultValue = "file2.json")
+    @Parameters(index = "1", description = "path to second file")
     private String strFilePath2;
 
     @Override
     public Integer call() throws Exception {
-        Differ differ = new Differ(strFilePath1, strFilePath2, format);
-        var resultDiff = differ.generateString();
-        //List resultDiff = Differ.generator(strFilePath1, strFilePath2, format);
+        Path pathToFile1 = Paths.get(strFilePath1).toAbsolutePath().normalize();
+        Path pathToFile2 = Paths.get(strFilePath2).toAbsolutePath().normalize();
+        var resultDiff = Differ.generate(pathToFile1, pathToFile2, format);
         System.out.println(resultDiff);
         return 0;
     }

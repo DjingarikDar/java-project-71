@@ -1,11 +1,6 @@
-package hexlet.code;
+package hexlet.code.parser;
 
-import hexlet.code.parser.FactoryParser;
-import hexlet.code.parser.JSONParser;
-import hexlet.code.parser.Parser;
-import hexlet.code.parser.YAMLParser;
 import org.junit.jupiter.api.Test;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 

@@ -1,10 +1,4 @@
-package hexlet.code;
-
-import hexlet.code.formatter.FactoryFormatter;
-import hexlet.code.formatter.Formatter;
-import hexlet.code.formatter.StylishFormatter;
-import hexlet.code.formatter.PlainFormatter;
-
+package hexlet.code.formatter;
 
 import org.junit.jupiter.api.Test;
 

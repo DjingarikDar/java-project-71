@@ -1,15 +1,19 @@
 package hexlet.code.formatter;
 
-import hexlet.code.Differ;
+import hexlet.code.calculations.CalculateDifference;
 import org.junit.jupiter.api.Test;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlainFormatterTest {
 
-    String pathToJsonFile1 = "src/test/resources/file1.json";
-    String pathToJsonFile2 = "src/test/resources/file2.json";
-
+    Path pathToJsonFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
+    Path pathToJsonFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
 
     @Test
     void generateString() throws Exception {
@@ -28,8 +32,9 @@ class PlainFormatterTest {
                 Property 'setting1' was updated. From 'Some value' to 'Another value'
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'""";
-        Differ differ = new Differ(pathToJsonFile1, pathToJsonFile2, "plain");
-        String actual = differ.generateString();
+        PlainFormatter plainFormatter = new PlainFormatter();
+        List<Map<String, Object>> list = CalculateDifference.generate(pathToJsonFile1, pathToJsonFile2);
+        String actual = plainFormatter.generateString(list);
         assertEquals(expected, actual);
     }
 }

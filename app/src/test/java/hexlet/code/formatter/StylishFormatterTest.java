@@ -1,18 +1,22 @@
 package hexlet.code.formatter;
 
-import hexlet.code.Differ;
+import hexlet.code.calculations.CalculateDifference;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashMap;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StylishFormatterTest {
-
+    Path pathToFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
+    Path pathToFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
     @Test
     void generateString() throws Exception {
+
         String expected = """
                 {
                     chars1: [a, b, c]
@@ -39,11 +43,8 @@ class StylishFormatterTest {
                   - setting3: true
                   + setting3: none
                 }""";
-        Differ differ = new Differ("src/test/resources/file1.json",
-                "src/test/resources/file2.json",
-                "stylish");
         StylishFormatter stylishFormatter = new StylishFormatter();
-        List<LinkedHashMap<String, Object>> list = differ.generateDiff();
+        List<Map<String, Object>> list = CalculateDifference.generate(pathToFile1, pathToFile2);
         String actual = stylishFormatter.generateString(list);
         assertEquals(expected, actual);
     }

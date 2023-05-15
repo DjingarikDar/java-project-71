@@ -1,7 +1,8 @@
 package hexlet.code.formatter;
 
+import hexlet.code.calculations.FieldStatus;
+
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,49 +10,39 @@ import java.util.stream.Collectors;
 
 public class PlainFormatter implements Formatter {
     @Override
-    public String generateString(List<LinkedHashMap<String, Object>> list) {
+    public String generateString(List<Map<String, Object>> list) {
         return list.stream()
                 .map(this::mapToString)
                 .filter(item -> !item.equals(""))
                 .collect(Collectors.joining("\n"));
     }
 
-    private String mapToString(LinkedHashMap<String, Object> map) {
+    private String mapToString(Map<String, Object> map) {
+
         map.entrySet().stream()
                 .filter(entry -> entry.getValue() instanceof String)
                 .forEach(entry -> entry.setValue("'" + entry.getValue() + "'"));
         map.entrySet().stream()
                 .filter(entry -> entry.getValue() instanceof Collection<?>
-                                 || entry.getValue() instanceof Map<?, ?>)
+                        || entry.getValue() instanceof Map<?, ?>)
                 .forEach(entry -> entry.setValue("[complex value]"));
-        if (map.size() > 1) {
-            return generateUpdateString(map);
-        } else {
-            return generateAddRemoveString(map);
+        FieldStatus fieldStatus = (FieldStatus) map.get("fieldStatus");
+        switch (fieldStatus) {
+            case UNCHANGED -> {
+                return "";
+            }
+            case CHANGED -> {
+                return "Property %s was updated. From %s to %s"
+                    .formatted(map.get("field"), map.get("oldValue"), map.get("newValue"));
+            }
+            case REMOVED -> {
+                return "Property %s was removed".formatted(map.get("field"));
+            }
+            case ADDED -> {
+                return "Property %s was added with value: %s"
+                        .formatted(map.get("field"), map.get("value"));
+            }
+            default -> throw new IllegalStateException("Unexpected fieldStatus: " + fieldStatus);
         }
     }
-
-    private String generateAddRemoveString(LinkedHashMap<String, Object> map) {
-        StringBuilder resultString = new StringBuilder();
-        String key = map.keySet().stream().findFirst().get();
-
-        if (key.startsWith("+")) {
-            resultString.append("Property '").append(key.split(" ")[1]).append("' was added with value: ")
-                    .append(map.get(key));
-        } else if (key.startsWith("-")) {
-            resultString.append("Property '").append(key.split(" ")[1]).append("' was removed");
-        }
-        return resultString.toString();
-    }
-
-    private String generateUpdateString(LinkedHashMap<String, Object> map) {
-        StringBuilder resultString = new StringBuilder();
-        String key = map.keySet().stream().findFirst().get().split(" ")[1];
-        resultString.append("Property '").append(key).append("' was updated. ");
-        var values = map.values().toArray();
-        resultString.append("From ").append(values[0]).append(" to ").append(values[1]);
-
-        return resultString.toString();
-    }
-
 }
