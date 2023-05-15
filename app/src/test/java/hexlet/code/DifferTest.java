@@ -12,37 +12,48 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifferTest {
-    Path pathToJsonFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
-    Path pathToJsonFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
-    Path pathToYamlFile1 = Paths.get("src/test/resources/file1.yml").toAbsolutePath().normalize();
-    Path pathToYamlFile2 = Paths.get("src/test/resources/file2.yml").toAbsolutePath().normalize();
-
+    String strPathToJsonFile1 = "src/test/resources/file1.json";
+    String strPathToJsonFile2 = "src/test/resources/file2.json";
+    String strPathToYamlFile1 = "src/test/resources/file1.yml";
+    String strPathToYamlFile2 = "src/test/resources/file2.yml";
 
     @Test
     void generateStylish() throws Exception {
         String format = "stylish";
-        String actual = Differ.generate(pathToJsonFile1, pathToJsonFile2, format);
+        String actual = Differ.generate(strPathToJsonFile1, strPathToJsonFile2, format);
+        Path path1 = Paths.get(strPathToJsonFile1).toAbsolutePath().normalize();
+        Path path2 = Paths.get(strPathToJsonFile2).toAbsolutePath().normalize();
+
         StylishFormatter formatter = new StylishFormatter();
+
         String expected = formatter
-                .generateString(CalculateDifference.generate(pathToJsonFile1, pathToJsonFile2));
+                .generateString(CalculateDifference.generate(path1, path2));
         assertEquals(expected, actual);
     }
+
     @Test
     void generatePlain() throws Exception {
         String format = "plain";
-        String actual = Differ.generate(pathToYamlFile1, pathToYamlFile2, format);
+        String actual = Differ.generate(strPathToYamlFile1, strPathToYamlFile2, format);
+        Path path1 = Paths.get(strPathToYamlFile1).toAbsolutePath().normalize();
+        Path path2 = Paths.get(strPathToYamlFile2).toAbsolutePath().normalize();
+
         PlainFormatter formatter = new PlainFormatter();
         String expected = formatter
-                .generateString(CalculateDifference.generate(pathToYamlFile1, pathToYamlFile2));
+                .generateString(CalculateDifference.generate(path1, path2));
         assertEquals(expected, actual);
     }
+
     @Test
     void generateJson() throws Exception {
         String format = "json";
-        String actual = Differ.generate(pathToJsonFile1, pathToJsonFile2, format);
+        String actual = Differ.generate(strPathToJsonFile1, strPathToJsonFile2, format);
+        Path path1 = Paths.get(strPathToJsonFile1).toAbsolutePath().normalize();
+        Path path2 = Paths.get(strPathToJsonFile2).toAbsolutePath().normalize();
+
         JsonFormatter formatter = new JsonFormatter();
         String expected = formatter
-                .generateString(CalculateDifference.generate(pathToJsonFile1, pathToJsonFile2));
+                .generateString(CalculateDifference.generate(path1, path2));
         assertEquals(expected, actual);
     }
 }

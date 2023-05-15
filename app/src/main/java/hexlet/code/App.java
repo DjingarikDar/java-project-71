@@ -5,8 +5,6 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
 
@@ -22,9 +20,8 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        Path pathToFile1 = Paths.get(strFilePath1).toAbsolutePath().normalize();
-        Path pathToFile2 = Paths.get(strFilePath2).toAbsolutePath().normalize();
-        var resultDiff = Differ.generate(pathToFile1, pathToFile2, format);
+
+        var resultDiff = Differ.generate(strFilePath1, strFilePath2, format);
         System.out.println(resultDiff);
         return 0;
     }
