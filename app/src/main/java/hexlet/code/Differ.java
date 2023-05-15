@@ -15,5 +15,8 @@ public class Differ {
         Formatter formatter = FactoryFormatter.getFormatter(format);
         return formatter.generateString(CalculateDifference.generate(pathToFile1, pathToFile2));
     }
+    public static String generate(String strFilePath1, String strFilePath2) throws Exception {
+       return generate(strFilePath1, strFilePath2, "stylish");
+    }
 
 }
