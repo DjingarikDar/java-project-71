@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-public class PlainFormatter implements Formatter {
+public final class PlainFormatter implements Formatter {
     @Override
     public String generateString(List<Map<String, Object>> list) {
         return list.stream()

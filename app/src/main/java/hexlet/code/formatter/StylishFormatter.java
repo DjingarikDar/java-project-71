@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-public class StylishFormatter implements Formatter {
+public final class StylishFormatter implements Formatter {
 
     @Override
     public String generateString(List<Map<String, Object>> list) {

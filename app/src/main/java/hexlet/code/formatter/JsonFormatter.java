@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class JsonFormatter implements Formatter {
+public final class JsonFormatter implements Formatter {
     @Override
     public String generateString(List<Map<String, Object>> list) {
         ObjectMapper mapper = new ObjectMapper();
