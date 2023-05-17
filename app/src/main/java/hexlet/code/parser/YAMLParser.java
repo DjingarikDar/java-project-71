@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-public class YAMLParser implements Parser {
+public final class YAMLParser implements Parser {
     @Override
     public Map<String, Object> toMap(Path filepath) throws IOException {
         if (Files.readString(filepath).isBlank()) {

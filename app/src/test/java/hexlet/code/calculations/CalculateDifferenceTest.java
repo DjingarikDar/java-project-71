@@ -12,12 +12,23 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculateDifferenceTest {
-    Path pathToEmptyJsonFile = Paths.get("src/test/resources/empty.json").toAbsolutePath().normalize();
-    Path pathToBlankJsonFile = Paths.get("src/test/resources/blank.json").toAbsolutePath().normalize();
-    Path pathToBlankYamlFile = Paths.get("src/test/resources/blank.yml").toAbsolutePath().normalize();
-    Path pathToJsonFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
-    Path pathToJsonFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
-    Path pathToYamlFile1 = Paths.get("src/test/resources/file1.yml").toAbsolutePath().normalize();
+    private final Path pathToEmptyJsonFile = Paths.get("src/test/resources/empty.json").toAbsolutePath().normalize();
+    private final Path pathToBlankJsonFile = Paths.get("src/test/resources/blank.json").toAbsolutePath().normalize();
+    private final Path pathToBlankYamlFile = Paths.get("src/test/resources/blank.yml").toAbsolutePath().normalize();
+    private final Path pathToJsonFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
+    private final Path pathToJsonFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
+    private final Path pathToYamlFile1 = Paths.get("src/test/resources/file1.yml").toAbsolutePath().normalize();
+    private final List<Integer> list1ForMapInit = List.of(1, 2, 3, 4);
+    private final List<Integer> list2ForMapInit = List.of(2, 3, 4, 5);
+    private final List<Integer> list3ForMapInit = List.of(22, 33, 44, 55);
+    private final List<Integer> list4ForMapInit = List.of(3, 4, 5);
+    private final List<Integer> list5ForMapInit = List.of(4, 5, 6);
+
+    private final int value1ForMapInit = 45;
+    private final int value2ForMapInit = 200;
+    private final int value3ForMapInit = 300;
+
+
 
 
     @Test
@@ -63,7 +74,7 @@ class CalculateDifferenceTest {
         Map<String, Object> map1 = new HashMap<>();
         map1.put("fieldStatus", FieldStatus.CHANGED);
         map1.put("field", "id");
-        map1.put("oldValue", 45);
+        map1.put("oldValue", value1ForMapInit);
         map1.put("newValue", null);
         expected.add(map1);
         expected.add(Map.of(
@@ -79,23 +90,23 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.UNCHANGED,
                 "field", "numbers1",
-                "value", List.of(1, 2, 3, 4)
+                "value", list1ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.CHANGED,
                 "field", "numbers2",
-                "oldValue", List.of(2, 3, 4, 5),
-                "newValue", List.of(22, 33, 44, 55)
+                "oldValue", list2ForMapInit,
+                "newValue", list3ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
                 "field", "numbers3",
-                "value", List.of(3, 4, 5)
+                "value", list4ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
                 "field", "numbers4",
-                "value", List.of(4, 5, 6)
+                "value", list5ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
@@ -114,8 +125,8 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.CHANGED,
                 "field", "setting2",
-                "oldValue", 200,
-                "newValue", 300
+                "oldValue", value2ForMapInit,
+                "newValue", value3ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.CHANGED,
@@ -155,7 +166,7 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
                 "field", "id",
-                "value", 45
+                "value", value1ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
@@ -165,17 +176,17 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
                 "field", "numbers1",
-                "value", List.of(1, 2, 3, 4)
+                "value", list1ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
                 "field", "numbers2",
-                "value", List.of(2, 3, 4, 5)
+                "value", list2ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
                 "field", "numbers3",
-                "value", List.of(3, 4, 5)
+                "value", list4ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
@@ -185,7 +196,7 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
                 "field", "setting2",
-                "value", 200
+                "value", value2ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.REMOVED,
@@ -224,7 +235,7 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
                 "field", "id",
-                "value", 45
+                "value", value1ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
@@ -234,17 +245,17 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
                 "field", "numbers1",
-                "value", List.of(1, 2, 3, 4)
+                "value", list1ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
                 "field", "numbers2",
-                "value", List.of(2, 3, 4, 5)
+                "value", list2ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
                 "field", "numbers3",
-                "value", List.of(3, 4, 5)
+                "value", list4ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
@@ -254,7 +265,7 @@ class CalculateDifferenceTest {
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,
                 "field", "setting2",
-                "value", 200
+                "value", value2ForMapInit
         ));
         expected.add(Map.of(
                 "fieldStatus", FieldStatus.ADDED,

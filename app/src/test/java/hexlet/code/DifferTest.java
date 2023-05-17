@@ -12,10 +12,10 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifferTest {
-    String strPathToJsonFile1 = "src/test/resources/file1.json";
-    String strPathToJsonFile2 = "src/test/resources/file2.json";
-    String strPathToYamlFile1 = "src/test/resources/file1.yml";
-    String strPathToYamlFile2 = "src/test/resources/file2.yml";
+    private final String strPathToJsonFile1 = "src/test/resources/file1.json";
+    private final String strPathToJsonFile2 = "src/test/resources/file2.json";
+    private final String strPathToYamlFile1 = "src/test/resources/file1.yml";
+    private final String strPathToYamlFile2 = "src/test/resources/file2.yml";
 
     @Test
     void generateStylish() throws Exception {

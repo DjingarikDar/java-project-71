@@ -12,6 +12,12 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class YAMLParserTest {
+    private final List<Integer> list1ForMapInit = List.of(1, 2, 3, 4);
+    private final List<Integer> list2ForMapInit = List.of(2, 3, 4, 5);
+    private final List<Integer> list3ForMapInit = List.of(3, 4, 5);
+
+    private final int value1ForMapInit = 45;
+    private final int value2ForMapInit = 200;
 
     @Test
     void toMap() throws IOException {
@@ -19,15 +25,15 @@ class YAMLParserTest {
         Map<String, Object> actual;
         Map<String, Object> expected = new HashMap<>();
         expected.put("setting1", "Some value");
-        expected.put("setting2", 200);
+        expected.put("setting2", value2ForMapInit);
         expected.put("setting3", true);
         expected.put("key1", "value1");
-        expected.put("numbers1", List.of(1, 2, 3, 4));
-        expected.put("numbers2", List.of(2, 3, 4, 5));
-        expected.put("id", 45);
+        expected.put("numbers1", list1ForMapInit);
+        expected.put("numbers2", list2ForMapInit);
+        expected.put("id", value1ForMapInit);
         expected.put("default", null);
         expected.put("checked", false);
-        expected.put("numbers3", List.of(3, 4, 5));
+        expected.put("numbers3", list3ForMapInit);
         expected.put("chars1", List.of("a", "b", "c"));
         expected.put("chars2", List.of("d", "e", "f"));
 

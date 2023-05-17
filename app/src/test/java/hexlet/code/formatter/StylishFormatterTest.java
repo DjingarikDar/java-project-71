@@ -12,8 +12,8 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StylishFormatterTest {
-    Path pathToFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
-    Path pathToFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
+    private final Path pathToFile1 = Paths.get("src/test/resources/file1.json").toAbsolutePath().normalize();
+    private final Path pathToFile2 = Paths.get("src/test/resources/file2.json").toAbsolutePath().normalize();
     @Test
     void generateString() throws Exception {
 
